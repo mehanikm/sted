@@ -1,4 +1,4 @@
-from functions import *
+import functions
 
 
 def stedtxt(text: str, spaces=True, capitals=True, mistakes=True, statistics=False, out=None):
@@ -16,7 +16,14 @@ def stedtxt(text: str, spaces=True, capitals=True, mistakes=True, statistics=Fal
         formatted_text(str): if [out] arg is None 
     """
 
-    if spaces:
-        spaces(text)
+    # Extract text from file/string and assing it to new [list] variable
+    original_text = functions.opener(text)  # list
+    formatted_text = original_text  # list
 
-    return None
+    # Execute function if its flag is True
+    if spaces:
+        functions.spaces(formatted_text)
+
+    # Assemble text back to string and return it
+    formatted_text = functions.assembler(formatted_text)
+    return formatted_text

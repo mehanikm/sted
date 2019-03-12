@@ -1,13 +1,13 @@
-def opener(text_path: str):
-    """Opens text_path file and return its text if exists, otherwise returns text_path"""
+def opener(text_path: str) -> list:
+    """Opens text_path file and return its text as a list if exists, otherwise returns text_path as a list"""
     try:
         with open(text_path, "rt") as file:
-            text = file.read()
+            text = file.read()  # .replace("\n", " ")
     except FileNotFoundError:
         print(
             f"File \"{text_path}\" was not found, processing \"{text_path}\" as text.")
         text = text_path
-    return text
+    return list(text)
 
 
 def assembler(text: list) -> str:
