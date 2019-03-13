@@ -20,10 +20,17 @@ def stedtxt(text: str, spaces=True, capitals=True, mistakes=True, statistics=Fal
     original_text = functions.opener(text)  # list
     formatted_text = original_text  # list
 
-    # Execute function if its flag is True
+    # Execute function [spaces] if its flag is True
     if spaces:
-        functions.spaces(formatted_text)
+        formatted_text = functions.spaces(formatted_text)
+
+    # Execute function [capitals] if its flag is True
+    if capitals:
+        formatted_text = functions.capitals(formatted_text)
 
     # Assemble text back to string and return it
     formatted_text = functions.assembler(formatted_text)
     return formatted_text
+
+
+print(stedtxt("text.txt"))
