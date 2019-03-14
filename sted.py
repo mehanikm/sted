@@ -28,9 +28,12 @@ def stedtxt(text: str, spaces=True, capitals=True, mistakes=True, statistics=Fal
     if capitals:
         formatted_text = functions.capitals(formatted_text)
 
+    # Execute function [statistics] if its flag is True, else assing None to variable
+    statistic = functions.statisctics(formatted_text) if statistics else None
+
     # Assemble text back to string and return it
     formatted_text = functions.assembler(formatted_text)
-    return formatted_text
+    return formatted_text, statistic
 
 
-print(stedtxt("text.txt"))
+print(*stedtxt("text.txt", statistics=True))
