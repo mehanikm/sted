@@ -1,24 +1,29 @@
 import functions
+import argsparse
+
+args = argsparse.args()
 
 
-def stedtxt(text: str, spaces=True, capitals=True, mistakes=True, statistics=False, out=None):
+def stedtxt(text: str, spaces=False, capitals=False, mistakes=False, statistics=False, out=None) -> str:
     """Main sted function
 
     Args:
         text(str): either path to text file or actual text
-        spaces(bool): removes excessive spaces if True
+        spaces(bool): removes excessive spaces
         capitals(bool): replaces lowercase letter to uppercase where needed
         mistakes(bool): checks for mistakes in text
         statistics(bool): gives statistics of formatted text
-        out(str OR None): path to output file, otherwise return formatted text as string
+        out(str OR None): path to output file
     Returns:
-        None: if [out] arg is not None
-        formatted_text(str): if [out] arg is None 
+        formatted_text(str), statistic(str): if [out] is None, print formatted text to
+            console/terminal, statistic is optional, either a string or None
+        statistic(str), output(str): if [out] is not None, returns the result of writing text to file
+            attempt, statistic is optional, either a string or None
     """
 
     # Extract text from file/string and assing it to new [list] variable
     original_text = functions.opener(text)  # list
-    formatted_text = original_text  # list
+    formatted_text = original_text[:]  # list
 
     # Execute function [spaces] if its flag is True
     if spaces:
@@ -39,8 +44,10 @@ def stedtxt(text: str, spaces=True, capitals=True, mistakes=True, statistics=Fal
         return statistic, functions.output(out, formatted_text)
 
     # Return text to console/terminal otherwise
-    return formatted_text, statistic
+    terminal_out = f"\n{30*'='}Output{30*'='}\n" + \
+        formatted_text + f"\n{66*'='}\n"
+    return terminal_out, statistic
 
 
 # Unpacking tuple in [print]
-print(*stedtxt("text.txt", statistics=True, out="text1.txt"))
+print(*stedtxt(*args))
