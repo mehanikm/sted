@@ -31,9 +31,16 @@ def stedtxt(text: str, spaces=True, capitals=True, mistakes=True, statistics=Fal
     # Execute function [statistics] if its flag is True, else assing None to variable
     statistic = functions.statisctics(formatted_text) if statistics else None
 
-    # Assemble text back to string and return it
+    # Assemble text back to string before return/writing to file
     formatted_text = functions.assembler(formatted_text)
+
+    # Writing to file if filepath in [out] is specified
+    if out is not None:
+        return statistic, functions.output(out, formatted_text)
+
+    # Return text to console/terminal otherwise
     return formatted_text, statistic
 
 
-print(*stedtxt("text.txt", statistics=True))
+# Unpacking tuple in [print]
+print(*stedtxt("text.txt", statistics=True, out="text1.txt"))

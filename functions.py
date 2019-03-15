@@ -82,3 +82,21 @@ def statisctics(text: list) -> str:
     symbs = len(text) - whitespaces
     words = len(assembler(text[:]).replace("\n", " ").strip().split(" "))
     return f"\n{20*'–'}\n{lines} lines\n{whitespaces} whitespaces\n{words} words\n{symbs} symbols\n{20*'–'}"
+
+
+def output(path: str, text: str) -> None:
+    """Writing output text to file"""
+    try:
+        # Text can be written only to following file extensions,
+        # albeit program creates file with any extension
+        if path.endswith((".txt", ".rtf", ".pdf", ".doc")):
+            with open(path, "wt") as file:
+                file.write(text)
+            return f"\n-> Successfully written text to \"{path}\"!"
+        else:
+            raise EnvironmentError(
+                0, "File extension must be either \".txt/.rtf/.pdf/.doc\"")
+    # Handling raised in [try] block exeption
+    except EnvironmentError as e:
+        return f"\n-> Can't write to \"{path}\" file!\n{e}"
+    return None
