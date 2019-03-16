@@ -5,8 +5,8 @@ import sys
 def args():
     parser = argparse.ArgumentParser(
         description="Stream text editor. Edits input \
-        text on the fly and outputs either to terminal or to file. ",
-        usage=f"{sys.argv[0]} path/text [-h] [-s] [-c] [-m] [-t] [-o path]"
+        text(text file) on the fly and outputs either to terminal or to file. ",
+        usage=f"python3 {sys.argv[0]} path/text [-h] [-s] [-c] [-m] [-t] [-o path]"
     )
     # Adding arguments
     # Setting all optional args to False with "default", and True if called with "const"
@@ -18,16 +18,16 @@ def args():
                         default=False, help="Removes excessive spaces in text")
     # Capitals func
     parser.add_argument("-c", "--capitals", required=False, default=False, action="store_const",
-                        const=True, help="Converts first letter after \".\" to uppercase")
+                        const=True, help="Converts first letter after '.' to uppercase")
     # Mistakes func
     parser.add_argument("-m", "--mistakes", required=False, default=False,
-                        action="store_const", const=True, help="Removes excessive spaces in text")
+                        action="store_const", const=True, help="Returns mistakes and its number")
     # Statistics
     parser.add_argument("-t", "--stats", required=False, default=False, action="store_const",
                         const=True, help="Returns number of lines, words, symbols and whitespaces")
     # Output file
     parser.add_argument("-o", "--output", required=False, metavar="path",
-                        default=None, help="Path to output file")
+                        default=None, help="Path to output file('.txt', '.rtf', '.pdf' or '.doc')")
 
     # parse args to variables
     args = parser.parse_args()
