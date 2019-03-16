@@ -36,17 +36,20 @@ def stedtxt(text: str, spaces=False, capitals=False, mistakes=False, statistics=
     # Execute function [statistics] if its flag is True, else assing None to variable
     statistic = functions.statisctics(formatted_text) if statistics else None
 
-    # Assemble text back to string before return/writing to file
+    #! Assemble text back to string before return/writing to file
     formatted_text = functions.assembler(formatted_text)
+
+    # Execute function [mistakes] if its flag is True, else assing None to variable
+    mistake = functions.mistakes(formatted_text) if mistakes else None
 
     # Writing to file if filepath in [out] is specified
     if out is not None:
-        return statistic, functions.output(out, formatted_text)
+        return statistic, mistake, functions.output(out, formatted_text)
 
     # Return text to console/terminal otherwise
     terminal_out = f"\n{30*'='}Output{30*'='}\n" + \
         formatted_text + f"\n{66*'='}\n"
-    return terminal_out, statistic
+    return terminal_out, statistic, mistake
 
 
 # Unpacking tuple in [print]
