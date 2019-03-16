@@ -24,7 +24,7 @@ def assembler(text: list) -> str:
 def spaces(text: list) -> list:
     """Removes excessive spaces in text"""
     c = 0
-    separators = "\"\\!?.,;:'\n) "  # last space in this string is essential!
+    separators = "\"\\!?.,;-–/_|+=:'\n) "  # last space in this string is essential!
     # Correcting spaces inside text
     for i in range(len(text)):
         while text[i-c] == " " and (text[i + 1-c] in separators or text[i-1-c] in " (\n"):
@@ -111,7 +111,7 @@ def mistakes(text: str):
     with open("dict.txt", "rt") as file:
         words = json.load(file)
     # Remove trash from text, leave only words
-    separators = "\"\\!?.,{};:'\n()[]\f\t\r\v"
+    separators = "\"\\!?.,{};:'\n()[-–|'<>«»~%“”„”_=*¯#+/]\f\t\r\v"
     text_copy = text[:]
     for sep in separators:
         text_copy = text_copy.replace(sep, " ")
@@ -119,17 +119,23 @@ def mistakes(text: str):
     not_found = []
     text_copy = text_copy.split()
     for i in range(len(text_copy)):
-        if not find_word(text_copy[i]):
+        if not find_word(text_copy[i]) and not text_copy[i].isnumeric():
             not_found.append((text_copy[i], i + 1))
-
+    # Unique mistakes
+    uniques = []
+    for i in not_found:
+        uniques.append(i[0])
+    # Form result
     result = "\n"+11*"–"+"Mistakes"+11*"–" + \
-        "\n{:<15} [# in text]\n".format("[word]")
+        "\n{:<19} [# in text]\n".format("[word]")
     for w in not_found:
-        result += "{:.<16} # {}\n".format("'"+w[0]+"'", w[1])
+        result += "{:.<20} # {}\n".format("'" + w[0] + "'", w[1])
+    result += f"Total: {len(not_found)}\nUnique: {len(set(uniques))}\n"
     result += 30*"–"
     return result
 
 
+# Dictionary
 with open("dict.txt", "rt") as file:
     words = json.load(file)
 
