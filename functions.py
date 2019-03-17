@@ -26,10 +26,11 @@ def spaces(text: list) -> list:
     c = 0
     separators = "\"\\!?.,;-–/_|+=:'\n) "  # last space in this string is essential!
     # Correcting spaces inside text
-    for i in range(len(text)):
-        while text[i-c] == " " and (text[i + 1-c] in separators or text[i-1-c] in " (\n"):
-            text.pop(i-c)
-            c += 1
+    i = 0
+    while (text[i-c] == " " and (text[i + 1-c] in separators or text[i-1-c] in " (\n")) and i < len(text):
+        text.pop(i - c)
+        i += 1
+        c += 1
     # Stripping excessive whitespaces on ends of text
     while not text[0].isalpha():
         text.pop(0)
