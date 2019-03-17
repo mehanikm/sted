@@ -72,3 +72,8 @@ def stedtxt(text: str, spaces=False, capitals=False, mistakes=False, statistics=
 print(*stedtxt(*args))
 total_time = -spaces_t - capitals_t - stats_t - assembl_t - mistake_t
 print("Time consumed:", total_time)
+print("Spaces:", -spaces_t)
+print("Capitals:", -capitals_t)
+print("Stats:", -stats_t)
+print("Mistakes:", -mistake_t)
+print("Assemble:", -assembl_t)
