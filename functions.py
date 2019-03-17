@@ -53,7 +53,9 @@ def capitals(text: list) -> list:
     text = []
     # Converting to uppercase
     for i in range(len(text_copy)):
-        if text_copy[i-1].endswith((".", ".\n")) and text_copy[i-1].lower() not in abbreviations:
+        if text_copy[i - 2].endswith((".", ".\n")) and \
+            text_copy[i - 1] == "\n" and \
+                text_copy[i-1].lower() not in abbreviations:
             text_copy[i] = text_copy[i].capitalize()
 
     # Creating list of chars
